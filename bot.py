@@ -32,9 +32,6 @@ class MyClient(Client):
             if not member.bot and not member.name not in [role.name for role in await guild.fetch_roles()]:
                 member.add_roles(await guild.create_role(name=member.name, colour=Colour.random(), mentionable=True))
                 
-        elif guild.id == 957889665380282418: # ingenjör bois
-            pass
-                
 
 with open('token.json') as token_file:
     global token, bot
