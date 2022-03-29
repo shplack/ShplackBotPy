@@ -1,5 +1,12 @@
 from discord import *
+import logging
 import json
+
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='/home/pi/ShplackBotPy/logs/shplackbot.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
 
 intents = Intents.default()
 intents.members = True
@@ -9,15 +16,6 @@ intents.guilds = True
 class MyClient(Client):
     async def on_ready(self):
         print('Logged on as', self.user)
-
-    async def on_message(self, message):
-        # don't respond to ourselves
-        if message.author == self.user:
-            print(message.guild.id)
-            return
-
-        if message.content == 'ping':
-            await message.channel.send('pong')
             
     async def on_member_join(self, member):
         guild = member.guild
